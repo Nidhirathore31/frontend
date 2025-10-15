@@ -2,8 +2,8 @@ import store from "@/app/redux/store";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  // baseURL : "http://localhost:3001/"
-  baseURL : "https://backend-wsnj.onrender.com/"
+  // baseURL : "http://localhost:3001/"  // for local development
+  baseURL : "https://ecommerce-27cm.onrender.com/"  // ✅ your actual backend URL
 });
 
 axiosInstance.interceptors.request.use((config)=>{
@@ -12,8 +12,8 @@ axiosInstance.interceptors.request.use((config)=>{
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
-
 });
+
 axiosInstance.interceptors.response.use(
   (res) => res,
   (err) => {
