@@ -41,7 +41,7 @@ const Header = () => {
         <div className="container position-relative">
           <Link className="navbar-brand" href="/">
             <h2>
-              Fuxso <em>Clothing</em>
+              Sixteen<em>Clothing</em>
             </h2>
           </Link>
 

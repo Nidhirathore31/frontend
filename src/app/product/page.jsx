@@ -53,7 +53,7 @@ const handleAddToCart = (product) => {
             <div className="col-md-10">
               <div className="text-content">
                 <h4>new arrivals</h4>
-                <h2>fuxso products</h2>
+                <h2>Sixteen Clothing products</h2>
               </div>
             </div>
           </div>
