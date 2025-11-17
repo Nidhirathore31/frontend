@@ -5,7 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { fetchProducts } from "../redux/slice/productSlice";
 import AddProductForm from "@/components/AddProductForm";
-import { addToCart, addToCartAPI, initializeCart } from "../redux/slice/cartSlice";
+import {
+  addToCart,
+  addToCartAPI,
+  initializeCart,
+} from "../redux/slice/cartSlice";
 import { toast } from "react-toastify";
 
 const Products = () => {
@@ -24,23 +28,20 @@ const Products = () => {
   //   dispatch(addToCartAPI(product)); // Optional: Persist to backend
   //   alert(`Added ${product.title} to cart!`);
   // };
-  
 
-const handleAddToCart = (product) => {
-  const payload = {
-    userId: user?._id, // This is required by the backend
-    productId: product._id, // Assuming MongoDB _id is the productId
-    name: product.title,
-    price: product.price,
-    quantity: 1
+  const handleAddToCart = (product) => {
+    const payload = {
+      userId: user?._id, // This is required by the backend
+      productId: product._id, // Assuming MongoDB _id is the productId
+      name: product.title,
+      price: product.price,
+      quantity: 1,
+    };
+
+    dispatch(addToCart(product)); // Update local state
+    dispatch(addToCartAPI(payload)); // Send proper payload to backend
+    toast.success(`Added ${product.title} to cart!`);
   };
-
-  dispatch(addToCart(product));        // Update local state
-  dispatch(addToCartAPI(payload));     // Send proper payload to backend
-  toast.success(`Added ${product.title} to cart!`);
-};
-
-  
 
   return (
     <>
@@ -99,8 +100,18 @@ const handleAddToCart = (product) => {
                     >
                       <div className="product-item">
                         <a href="#">
-                          <img
+                          {/* <img
                             src={`http://localhost:3001/${product.image}`}
+                            alt={product.title}
+                            style={{
+                              width: "100%",
+                              height: "250px",
+                              objectFit: "cover",
+                              borderRadius: "8px",
+                            }}
+                          /> */}
+                          <img
+                            src={product.image}
                             alt={product.title}
                             style={{
                               width: "100%",
@@ -130,7 +141,14 @@ const handleAddToCart = (product) => {
                           <span>Rating: {product.ratings}</span>
                           <button
                             className="filled-button w-100 mt-3"
-                            style={{ background: '#f33f3f', color: '#fff', border: 'none', borderRadius: 5, fontWeight: 500, fontSize: 15 }}
+                            style={{
+                              background: "#f33f3f",
+                              color: "#fff",
+                              border: "none",
+                              borderRadius: 5,
+                              fontWeight: 500,
+                              fontSize: 15,
+                            }}
                             onClick={() => handleAddToCart(product)}
                           >
                             <i className="fa fa-cart-plus me-2"></i> Add to Cart
